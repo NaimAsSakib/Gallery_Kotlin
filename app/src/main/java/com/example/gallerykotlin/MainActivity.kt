@@ -1,6 +1,8 @@
 package com.example.gallerykotlin
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +18,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ItemOnClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var recyclerView: RecyclerView
@@ -70,13 +72,14 @@ class MainActivity : AppCompatActivity() {
 
                 if (response.isSuccessful){
                     //recyclerview code
-                    val programAdapter= responseDetailsFromAPI?.let { MainActRCVAdapter(it) }
+                    val programAdapter= responseDetailsFromAPI?.let { MainActRCVAdapter(it, this@MainActivity) }
                     recyclerView.adapter = programAdapter
                     Toast.makeText(this@MainActivity,"Successful", Toast.LENGTH_SHORT).show()
 
                 }else{
                     Toast.makeText(this@MainActivity, response.message(), Toast.LENGTH_SHORT).show()
                 }
+
             }
 
             override fun onFailure(call: Call<ArrayList<ResponseDataItem>?>, t: Throwable) {
@@ -84,5 +87,13 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    override fun onImageClicked(imagePath: String?) {
+        Log.e("image", "imagepath "+imagePath)
+        //sending that image to another Activity
+        val intent = Intent(this, FullScreenActivity::class.java)
+        intent.putExtra("imageNumber", imagePath)
+        startActivity(intent)
     }
 }

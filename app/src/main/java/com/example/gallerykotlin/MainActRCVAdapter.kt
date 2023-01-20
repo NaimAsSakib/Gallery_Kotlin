@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.gallerykotlin.model.ResponseDataItem
 
-class MainActRCVAdapter(private val responsePojo: ArrayList<ResponseDataItem>): RecyclerView.Adapter<MainActRCVAdapter.MyViewHolder>() {
+class MainActRCVAdapter(private val responsePojo: ArrayList<ResponseDataItem>, private val itemOnClickListener: ItemOnClickListener):
+    RecyclerView.Adapter<MainActRCVAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -33,6 +34,11 @@ class MainActRCVAdapter(private val responsePojo: ArrayList<ResponseDataItem>): 
             .load(item.urls.regular)
             .error(R.drawable.myphoto)
             .into(holder.image)
+
+        holder.image.setOnClickListener {
+            val passImage= item.urls.regular
+            itemOnClickListener.onImageClicked(passImage)
+        }
 
     }
 
