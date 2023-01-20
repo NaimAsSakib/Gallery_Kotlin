@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity(), ItemOnClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var recyclerView: RecyclerView
+    private lateinit var mySharedPref: MySharedPref
 
 
     //API code
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity(), ItemOnClickListener {
         //setContentView(R.layout.activity_main)
         binding= ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
+
+        mySharedPref=MySharedPref(this)
 
         recyclerView=findViewById(R.id.recyclerView)
         recyclerView.layoutManager= LinearLayoutManager(this)
@@ -91,6 +94,7 @@ class MainActivity : AppCompatActivity(), ItemOnClickListener {
 
     override fun onImageClicked(imagePath: String?) {
         Log.e("image", "imagepath "+imagePath)
+        mySharedPref.putString("imageUrl",imagePath)
         //sending that image to another Activity
         val intent = Intent(this, FullScreenActivity::class.java)
         intent.putExtra("imageNumber", imagePath)
