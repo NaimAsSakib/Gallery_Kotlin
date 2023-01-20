@@ -95,5 +95,6 @@ class MainActivity : AppCompatActivity(), ItemOnClickListener {
         val intent = Intent(this, FullScreenActivity::class.java)
         intent.putExtra("imageNumber", imagePath)
         startActivity(intent)
+
     }
 }
