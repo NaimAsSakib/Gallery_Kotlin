@@ -3,7 +3,7 @@ package com.example.gallerykotlin
 import android.content.Context
 import android.content.SharedPreferences
 
-class MySharedPref( getContext: Context){
+class MySharedPref( context: Context){
     //This class is taken only for shared preferences purpose
     //This class is taken only for shared preferences purpose
     // through this class I can us it's methods by making its object anywhere in the project
@@ -11,7 +11,7 @@ class MySharedPref( getContext: Context){
     private var editor: SharedPreferences.Editor? = null
 
     init {
-        sharedPreferences = getContext.getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
+        sharedPreferences = context.getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
         editor = sharedPreferences!!.edit()
     }
     fun putInt(key: String?, value: Int) {

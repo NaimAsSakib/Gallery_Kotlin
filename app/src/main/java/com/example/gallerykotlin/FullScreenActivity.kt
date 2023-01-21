@@ -14,5 +14,7 @@ class FullScreenActivity : AppCompatActivity() {
         mySharedPref= MySharedPref(this)
         val imageSavedInSharedPref= mySharedPref.getString("imageUrl")
         Log.e("shared pref","value "+imageSavedInSharedPref)
+
+
     }
 }
